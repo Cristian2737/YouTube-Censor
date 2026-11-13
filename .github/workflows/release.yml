@@ -3,6 +3,7 @@ name: Build and release YouTube Censor
 on:
   push:
     branches: [main]
+    paths-ignore: ["**.md", "patches-list.json"]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -39,6 +40,8 @@ jobs:
         run: |
           git clone --depth 1 --branch v2.2.0 https://github.com/MorpheApp/morphe-patches.git upstream
           test "$(git -C upstream rev-parse HEAD)" = 44031c561ea048c8f196877f30a49c13bfd6afb6
+      - name: Verify community discovery catalog
+        run: python3 tools/generate_catalog.py upstream/patches-list.json --check
       - name: Apply independent YouTube Censor overlay
         run: python3 apply_to_morphe.py upstream
       - name: Check runtime and Android-local caption acquisition
