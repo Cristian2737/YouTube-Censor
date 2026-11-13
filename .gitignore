@@ -1,0 +1,14 @@
+build/
+upstream/
+dist/
+__pycache__/
+*.pyc
+*.apk
+*.apks
+*.aab
+*.mpp
+*.jks
+*.p12
+*.keystore
+local.properties
+.env
