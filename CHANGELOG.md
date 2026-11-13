@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.8.1 ? public alpha
+## 0.8.1 - public alpha
 
 - Publish the tested v0.8 Java runtime under the name **YouTube Censor**.
 - Rename the selectable patch, settings screen and bundle; retain internal preference keys for compatibility.

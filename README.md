@@ -6,13 +6,13 @@ Mute profanity in the Android YouTube app using caption word timing. Runs on you
 
 ## Install on Android
 
-1. Install [Morphe Manager from its official releases](https://github.com/MorpheApp/morphe-manager/releases/latest). For the tested YouTube version, use Android 10 or later and leave about 1?2 GB free for patching.
-2. Open **[Add YouTube Censor to Morphe](https://morphe.software/add-source?github=Cristian2737/YouTube-Censor&name=YouTube%20Censor&app=com.google.android.youtube)** on your phone and confirm. Alternatively, in Manager choose **Sources ? + ? Remote** and enter `https://github.com/Cristian2737/YouTube-Censor`. Keep YouTube enabled for this source.
+1. Install [Morphe Manager from its official releases](https://github.com/MorpheApp/morphe-manager/releases/latest). For the tested YouTube version, use Android 10 or later and leave about 1-2 GB free for patching.
+2. Open **[Add YouTube Censor to Morphe](https://morphe.software/add-source?github=Cristian2737/YouTube-Censor&name=YouTube%20Censor&app=com.google.android.youtube)** on your phone and confirm. Alternatively, in Manager choose **Sources > + > Remote** and enter `https://github.com/Cristian2737/YouTube-Censor`. Keep YouTube enabled for this source.
 3. Use **YouTube Censor as the source for YouTube**. This bundle includes the upstream Morphe patches as well as this patch; choose your other desired patches from this bundle too. Do not combine duplicate copies of the same patches from both bundles in one patching job. The official source can still serve other apps.
 4. Select a clean, supported YouTube APK. **21.30.216 is the version tested here.** Obtain it yourself from a source you trust; no YouTube APK is distributed here. In the patch list, select **YouTube Censor** along with the other patches you want, then patch and install. For non-root installation, retain **GmsCore support** and follow [Morphe's installation guide](https://github.com/MorpheApp/morphe-manager/blob/main/docs/patching-simple-mode.md) for the required GmsCore app.
-5. In the patched app, open **Settings ? Morphe ? Player ? YouTube Censor**. Leave **Fetch word timing on this device** enabled. Restart the app after changing settings when prompted. Keep **Test audio muting (first 5 seconds)** off for normal viewing.
+5. In the patched app, open **Settings > Morphe > Player > YouTube Censor**. Leave **Fetch word timing on this device** enabled. Restart the app after changing settings when prompted. Keep **Test audio muting (first 5 seconds)** off for normal viewing.
 
-If the add-source link does not launch Manager, use the manual Remote method above. If your Manager hides alpha releases, enable **Pre-release patches** for this source. If remote import is unavailable, download `youtube-censor.mpp` from [Releases](https://github.com/Cristian2737/YouTube-Censor/releases/tag/v0.8.1) and add it using **Sources ? + ? Local**; local sources require manual updates.
+If the add-source link does not launch Manager, use the manual Remote method above. If your Manager hides alpha releases, enable **Pre-release patches** for this source. If remote import is unavailable, download `youtube-censor.mpp` from [Releases](https://github.com/Cristian2737/YouTube-Censor/releases/tag/v0.8.1) and add it using **Sources > + > Local**; local sources require manual updates.
 
 ### Updating an existing patched YouTube app
 
@@ -35,7 +35,7 @@ The patch requests public video/player configuration and caption data **directly
 ## Source, testing and support
 
 - [Release downloads and checksums](https://github.com/Cristian2737/YouTube-Censor/releases)
-- [Build from source](BUILDING.md) ? [Testing evidence and limitations](TESTING.md) ? [Changelog](CHANGELOG.md)
+- [Build from source](BUILDING.md) - [Testing evidence and limitations](TESTING.md) - [Changelog](CHANGELOG.md)
 - [Report a problem](https://github.com/Cristian2737/YouTube-Censor/issues): include Android/YouTube/Manager versions, video link, timestamp, caption language, settings and what happened. Do not post cookies, account tokens, signing keys or full device logs.
 
 Independent project maintained by Cristian2737, derived from [Morphe patches v2.2.0](https://github.com/MorpheApp/morphe-patches/tree/44031c561ea048c8f196877f30a49c13bfd6afb6). Not an official Morphe, YouTube or ContentAngel release. ContentAngel was a behavior/timing reference; no ContentAngel extension code is included. Licensed under [GPLv3](LICENSE) with the preserved [Morphe NOTICE](NOTICE). No affiliation or trademark rights are claimed.

@@ -5,9 +5,9 @@
 The v0.8 candidate was tested on a Motorola moto g play (2024), Android 14, YouTube 21.30.216. Video: https://www.youtube.com/watch?v=8_vTxsB3IYA (ibz).
 
 - Android-only caption acquisition produced 3,263 word offsets, matching the reference schedule, without a desktop export or cookie transfer.
-- The first checked mute window was 94,741?95,200 ms.
+- The first checked mute window was 94,741-95,200 ms.
 - A 216-sample integration pass observed muting within that window and restoration afterward, with the audio self-test disabled.
-- The user confirmed: ?Yes?clean mute, following words audible.?
+- The user confirmed: "Yes - clean mute, following words audible."
 - The user's main installation was separately rebuilt with its 114 existing selected patches plus the filter; its signing identity and app data were retained. Main-app settings and Android caption acquisition were checked silently.
 
 Sanitized machine-readable candidate evidence is in `tests/`. The hashes there identify the **earlier v0.8 candidate**, not this newly named 0.8.1 bundle. The public 0.8.1 packaging changes the patch/settings/source name and bundle version; its Java runtime is unchanged. Release checksums identify the new bundle.
