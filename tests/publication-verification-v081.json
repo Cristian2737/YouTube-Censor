@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/Cristian2737/YouTube-Censor",
+  "release": "https://github.com/Cristian2737/YouTube-Censor/releases/tag/v0.8.1",
+  "version": "0.8.1",
+  "catalogPatchCount": 203,
+  "bundleSha256": "0273c7b259fb9416ce3c704c98962a2700b67a553f26c6a00ccdc1c79002c2fb",
+  "bundleBytes": 16843035,
+  "anonymousDownloadVerified": true,
+  "testsPassed": 157,
+  "buildSuccess": true,
+  "workflowPublishFailureResolvedByMaintainerCli": true,
+  "newPhoneSourceImportTested": false,
+  "candidateSourceCommit": "b91f6ecba3672d60242e4f9b585c922ee80e0c78",
+  "buildWorkflow": "https://github.com/Cristian2737/YouTube-Censor/actions/runs/43481966639",
+  "communityListingRequest": "https://github.com/nvbangg/awesome-morphe/issues/59",
+  "communityListingStatus": "Submitted; awaiting maintainer review",
+  "correspondingSourceIncluded": true,
+  "licenseAndNoticeIncluded": true,
+  "javaRuntimeMatchesListenedV08Candidate": true,
+  "limitations": "Branding/package release only; no new phone source-import or audible test. The build and tests succeeded; the workflow release step received GitHub 403 and publication was completed using the authenticated maintainer CLI."
+}
