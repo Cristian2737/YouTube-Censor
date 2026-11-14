@@ -33,11 +33,13 @@ jobs:
       - name: Check pure rules and reference timings
         run: |
           mkdir -p /tmp/censor-testclasses
-          javac -encoding UTF-8 -d /tmp/censor-testclasses src/ProfanityRules.java src/ProfanitySchedule.java tests/ProfanityScheduleTest.java tests/ContentAngelTimingTest.java tests/ProfanityWordsTest.java
+          javac -encoding UTF-8 -d /tmp/censor-testclasses src/ProfanityRules.java src/ProfanitySchedule.java src/ProfanityChannels.java tests/ProfanityScheduleTest.java tests/ContentAngelTimingTest.java tests/ProfanityWordsTest.java tests/ProfanityChannelsTest.java
           java -cp /tmp/censor-testclasses app.morphe.extension.youtube.patches.ProfanityScheduleTest
           java -cp /tmp/censor-testclasses app.morphe.extension.youtube.patches.ContentAngelTimingTest tests/contentangel-word-timing.tsv
           java -cp /tmp/censor-testclasses app.morphe.extension.youtube.patches.ProfanityWordsTest
           python3 tests/run_word_editor_tests.py
+          java -cp /tmp/censor-testclasses app.morphe.extension.youtube.patches.ProfanityChannelsTest
+          python3 tests/run_channel_editor_tests.py
       - name: Fetch exact upstream source
         run: |
           git clone --depth 1 --branch v2.2.0 https://github.com/MorpheApp/morphe-patches.git upstream
@@ -81,7 +83,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          tag=v0.9.0
+          tag=v0.10.0
           tagged=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)
           test "$tagged" = "$GITHUB_SHA" || { echo 'Create a lightweight release tag on this exact commit before dispatching.'; exit 1; }
-          gh release create "$tag" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --title "YouTube Censor 0.9.0 - editable word list alpha" --prerelease --notes-file RELEASE_NOTES.md
+          gh release create "$tag" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --title "YouTube Censor 0.10.0 - channel whitelist alpha" --prerelease --notes-file RELEASE_NOTES.md

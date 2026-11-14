@@ -57,6 +57,16 @@ public final class ProfanityRuntimeTest {
         at(1500); volume(.42f, "new video cannot inherit previous transcript");
         capture("abcdefghijk"); at(1500); volume(.42f, "background captions cannot mute current video");
         capture(VideoInformation.video); at(1500); volume(0, "current video captions activate");
+        Settings.PROFANITY_NEVER_CHANNELS.save("channel-1");
+        ProfanityFilterPatch.channelRulesChanged(); volume(.42f,"whitelisting immediately releases a current censor mute");
+        Settings.PROFANITY_NEVER_CHANNELS.save("");
+        ProfanityFilterPatch.channelRulesChanged(); volume(0,"removing whitelist immediately reapplies cached timing");
+        PlayerVolumePatch.setMuted(true);
+        Settings.PROFANITY_NEVER_CHANNELS.save("channel-1");
+        ProfanityFilterPatch.channelRulesChanged(); volume(0,"whitelist change preserves user mute");
+        PlayerVolumePatch.setMuted(false); volume(.42f,"whitelisted playback restores user-selected volume");
+        Settings.PROFANITY_NEVER_CHANNELS.save("");
+        ProfanityFilterPatch.channelRulesChanged(); volume(0,"filter resumes after unwhitelisting");
         Settings.PROFANITY_NEVER_CHANNELS.save("ibz");
         at(1500); volume(.42f, "never-censor channel wins");
         Settings.PROFANITY_ALWAYS_CHANNELS.save("channel-1");

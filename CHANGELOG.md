@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 - channel whitelist alpha
+
+- Add a separate shield action on channel pages using the shared browse and toolbar hooks, following Morphe's Channel search layout. Does not require selecting Channel search or replace its controls.
+- Capture the viewed channel's stable ID, show checked state for a whitelist entry, and confirm additions/removals.
+- Add a searchable whitelist editor with labels, editable IDs/names, per-row removal, Save/Cancel and legacy-setting compatibility.
+- Apply audio exceptions immediately, retain user mute/ducking and keep Never censor priority over Always censor.
+- Add 30 channel-model checks, 24 toolbar/editor callback checks, and five immediate-volume regression checks. Native phone UI verification remains pending.
+
 ## 0.9.0 - editable word list alpha
 
 - Show the complete active list of default and custom words and phrases in a native editor.

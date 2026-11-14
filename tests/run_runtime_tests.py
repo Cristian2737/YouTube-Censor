@@ -107,7 +107,7 @@ def main():
     parser.add_argument("--java-home", type=Path, default=os.environ.get("JAVA_HOME"))
     args = parser.parse_args()
     java_root = args.upstream / "extensions/youtube/src/main/java/app/morphe/extension/youtube/patches"
-    sources = [java_root / name for name in ("ProfanityRules.java", "ProfanitySchedule.java",
+    sources = [java_root / name for name in ("ProfanityRules.java", "ProfanitySchedule.java", "ProfanityChannels.java",
                                             "ProfanityFilterPatch.java", "PlayerVolumePatch.java")]
     sources.append(HERE / "ProfanityRuntimeTest.java")
     executable = lambda name: str(args.java_home / "bin" / (name + (".exe" if os.name == "nt" else ""))) if args.java_home else name

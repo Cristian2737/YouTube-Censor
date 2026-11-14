@@ -33,13 +33,22 @@ def install(root: Path) -> None:
     java = root / "extensions/youtube/src/main/java/app/morphe/extension/youtube"
     kotlin = root / "patches/src/main/kotlin/app/morphe/patches/youtube"
 
-    for name in ("ProfanityRules.java", "ProfanitySchedule.java", "ProfanityFilterPatch.java", "ProfanityWebCaptions.java", "ProfanityWordsPreference.java"):
+    for name in ("ProfanityRules.java", "ProfanitySchedule.java", "ProfanityFilterPatch.java", "ProfanityWebCaptions.java", "ProfanityWordsPreference.java", "ProfanityChannels.java", "ProfanityChannelWhitelist.java", "ProfanityChannelsPreference.java"):
         source = HERE / "src" / name
         target = java / "patches" / name
         if target.is_file() and target.read_bytes() != source.read_bytes():
             raise RuntimeError(f"Refusing to overwrite modified file: {target}")
         shutil.copyfile(source, target)
         print("Installed:", target)
+
+    drawables = root / "patches/src/main/resources/profanity/drawable"
+    drawables.mkdir(parents=True, exist_ok=True)
+    for name in ("morphe_censor_channel_add.xml", "morphe_censor_channel_allowed.xml"):
+        source = HERE / "src" / name
+        target = drawables / name
+        if target.is_file() and target.read_bytes() != source.read_bytes():
+            raise RuntimeError(f"Refusing to overwrite modified resource: {target}")
+        shutil.copyfile(source, target)
 
     patch_file = kotlin / "video/profanity/ProfanityFilterPatch.kt"
     patch_file.parent.mkdir(parents=True, exist_ok=True)
@@ -67,6 +76,7 @@ def install(root: Path) -> None:
     public static final StringSetting PROFANITY_CENSOR_STYLE = new StringSetting("morphe_profanity_censor_style", "asterisks", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_ALWAYS_CHANNELS = new StringSetting("morphe_profanity_always_channels", "", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_NEVER_CHANNELS = new StringSetting("morphe_profanity_never_channels", "", parent(PROFANITY_FILTER));
+    public static final StringSetting PROFANITY_CHANNEL_LABELS = new StringSetting("morphe_profanity_channel_labels", "");
     public static final BooleanSetting PROFANITY_DIAGNOSTICS = new BooleanSetting("morphe_profanity_diagnostics", FALSE, parent(PROFANITY_FILTER));
     public static final BooleanSetting PROFANITY_TEST_AUDIO = new BooleanSetting("morphe_profanity_test_audio", FALSE, parent(PROFANITY_FILTER));
     public static final BooleanSetting STABLE_CAPTION_BLOCKS = new BooleanSetting("morphe_stable_caption_blocks", FALSE, true,''')
@@ -164,7 +174,9 @@ def install(root: Path) -> None:
     <string name="morphe_profanity_screen_title">YouTube Censor</string>
     <string name="morphe_profanity_screen_summary">Mute profanity detected in timed subtitles</string>
     <string name="morphe_profanity_filter_title">Enable YouTube Censor</string>
-    <string name="morphe_profanity_filter_summary">YouTube Censor 0.9.0 alpha: fetch word timing on this device; restart after changing settings.</string>
+    <string name="morphe_profanity_filter_summary">YouTube Censor 0.10.0 alpha: word editor and channel whitelist; restart after changing word rules.</string>
+    <string name="morphe_profanity_channels_editor_title">Whitelisted channels</string>
+    <string name="morphe_profanity_channels_editor_summary">View, add, edit or remove channels that YouTube Censor skips. Also available from the shield button on a channel page.</string>
     <string name="morphe_profanity_words_editor_title">Censored words and phrases</string>
     <string name="morphe_profanity_words_editor_summary">View the full active word list. Search, add, edit or remove entries without regex.</string>
     <string name="morphe_profanity_advanced_title">Advanced word rules</string>
@@ -234,7 +246,7 @@ def install(root: Path) -> None:
         source = "https://github.com/Cristian2737/YouTube-Censor"
         author = "Cristian2737"''')
 
-    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.9.0")
+    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.10.0")
 
     print("Installed YouTube Censor. Run: ./gradlew buildAndroid")
 

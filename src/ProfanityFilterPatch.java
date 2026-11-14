@@ -80,22 +80,20 @@ public final class ProfanityFilterPatch {
      * Never-censor wins over always-censor when both lists contain a channel.
      */
     private static boolean containsChannel(String entries) {
-        if (entries == null || entries.isBlank()) return false;
-        String id = VideoInformation.getChannelId();
-        String name = VideoInformation.getChannelName();
-        for (String raw : entries.split("[,;\\r\\n]+")) {
-            String entry = raw.strip();
-            if (entry.isEmpty()) continue;
-            if (id != null && entry.equalsIgnoreCase(id)) return true;
-            if (name != null && entry.equalsIgnoreCase(name)) return true;
-        }
-        return false;
+        return ProfanityChannels.matches(entries,VideoInformation.getChannelId(),VideoInformation.getChannelName());
     }
 
     public static boolean isEnabled() {
         if (containsChannel(Settings.PROFANITY_NEVER_CHANNELS.get())) return false;
         return Settings.PROFANITY_FILTER.get()
                 || containsChannel(Settings.PROFANITY_ALWAYS_CHANNELS.get());
+    }
+
+    /** Apply channel exceptions immediately while preserving user mute/ducking. */
+    public static void channelRulesChanged() {
+        Utils.runOnMainThreadNowOrLater(() -> {
+            updateMute(); schedule(); maybeFetchWordTiming();
+        });
     }
 
     private static long muteBufferMs() {

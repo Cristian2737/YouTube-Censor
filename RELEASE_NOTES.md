@@ -1,4 +1,8 @@
-# YouTube Censor 0.9.0 - editable word list alpha
+# YouTube Censor 0.10.0 - channel whitelist alpha
+
+Whitelist the channel you are viewing with the new **shield +** toolbar action. A checked shield means the channel is exempt; tap it to remove the exception. This works alongside the existing Channel search action and does not require that patch to be selected.
+
+Manage entries under **Settings > Morphe > Player > YouTube Censor > Whitelisted channels**: search, add, edit IDs or readable labels, remove, Save and Cancel. Existing channel exceptions are preserved. Channel-page additions use stable IDs. Audio mute decisions refresh immediately while preserving your own mute and volume choices. No new network request is needed to add an entry.
 
 See and customize the full active word list on Android. Open **Settings > Morphe > Player > YouTube Censor > Censored words and phrases**.
 
@@ -16,7 +20,7 @@ Select **YouTube Censor** from this bundle alongside your desired upstream patch
 
 Update the source in Morphe Manager, then repatch a clean supported YouTube APK with **YouTube Censor** and your existing patches. Updating a patch source alone does not modify an installed app.
 
-Automated suites cover 211 assertions, including 35 word-list/migration checks and 19 actual editor callback checks using Android view doubles. The earlier v0.8 runtime passed a phone listening check. This editor update still needs a new real-phone UI test; no phone was connected during development. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
+Automated suites cover 270 assertions, including channel navigation, preserving search actions, stable IDs, editing labels, Save/Cancel and immediate audio restoration. Toolbar/editor callbacks use Android view doubles. The earlier v0.8 runtime passed a phone listening check. New interfaces still need real-phone UI testing; no phone was connected during development. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
 
 Assets:
 - **youtube-censor.mpp** - import into Morphe Manager, not an APK.

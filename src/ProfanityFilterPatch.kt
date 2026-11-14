@@ -9,14 +9,23 @@ import app.morphe.patches.shared.misc.settings.preference.TextPreference
 import app.morphe.patches.youtube.layout.captions.translatedCaptionPensPatch
 import app.morphe.patches.youtube.misc.settings.PreferenceScreen
 import app.morphe.patches.youtube.misc.settings.settingsPatch
+import app.morphe.patches.youtube.misc.navigation.addBrowseIdHook
+import app.morphe.patches.youtube.misc.navigation.addSearchResultsHook
+import app.morphe.patches.youtube.misc.navigation.browseIdHookPatch
+import app.morphe.patches.youtube.misc.toolbar.hookToolBar
+import app.morphe.patches.youtube.misc.toolbar.toolBarHookPatch
 import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
 import app.morphe.patches.youtube.video.information.videoInformationPatch
 import app.morphe.patches.youtube.video.information.videoTimeHook
 import app.morphe.patches.youtube.video.videoid.hookVideoId
 import app.morphe.patches.youtube.video.volume.playerVolumeHookPatch
+import app.morphe.util.ResourceGroup
+import app.morphe.util.copyResources
 
 private const val EXTENSION_CLASS =
     "Lapp/morphe/extension/youtube/patches/ProfanityFilterPatch;"
+private const val CHANNEL_CLASS =
+    "Lapp/morphe/extension/youtube/patches/ProfanityChannelWhitelist;"
 
 @Suppress("unused")
 val profanityFilterPatch = patch(
@@ -28,9 +37,13 @@ val profanityFilterPatch = patch(
         videoInformationPatch,
         playerVolumeHookPatch,
         settingsPatch,
+        toolBarHookPatch,
+        browseIdHookPatch,
     )
     compatibleWith(COMPATIBILITY_YOUTUBE)
     execute {
+        copyResources("profanity", ResourceGroup("drawable",
+            "morphe_censor_channel_add.xml", "morphe_censor_channel_allowed.xml"))
         PreferenceScreen.PLAYER.addPreferences(
             PreferenceScreenPreference(
                 key = "morphe_profanity_screen",
@@ -56,7 +69,8 @@ val profanityFilterPatch = patch(
                     TextPreference("morphe_profanity_mute_duration"),
                     ListPreference("morphe_profanity_censor_style"),
                     TextPreference("morphe_profanity_always_channels"),
-                    TextPreference("morphe_profanity_never_channels"),
+                    TextPreference("morphe_profanity_channels_editor",
+                        tag = "app.morphe.extension.youtube.patches.ProfanityChannelsPreference"),
                     SwitchPreference("morphe_profanity_diagnostics", summary = true),
                     SwitchPreference("morphe_profanity_test_audio", summary = true),
                 ),
@@ -64,5 +78,8 @@ val profanityFilterPatch = patch(
         )
         hookVideoId("$EXTENSION_CLASS->onVideoId(Ljava/lang/String;)V")
         videoTimeHook(EXTENSION_CLASS, "videoTimeChanged")
+        hookToolBar("$CHANNEL_CLASS->setSearchButtonView")
+        addBrowseIdHook("$CHANNEL_CLASS->setBrowseId(Ljava/lang/String;)V")
+        addSearchResultsHook("$CHANNEL_CLASS->clearBrowseId()V")
     }
 }

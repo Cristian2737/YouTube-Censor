@@ -14,9 +14,9 @@ Sanitized machine-readable candidate evidence is in `tests/`. The hashes there i
 
 ## Automated checks
 
-211 assertions: 35 rules/scheduling, 41 reference-timing cases, 34 runtime lifecycle/volume cases, 47 acquisition/parser cases, 35 word-list/migration cases and 19 editor callback cases. They check matching, narrow windows, volume composition, stale responses, bounded acquisition and richer-caption precedence. The editor suite runs the actual preference callbacks with Android view doubles: existing settings, search, additions, editing, removal, duplicate/blank validation, Save/Cancel, staged Restore Defaults and empty-list persistence. These are host checks, not a rendering or listening test on Android.
+270 assertions: 35 rules/scheduling, 41 reference-timing cases, 39 runtime lifecycle/volume cases, 47 acquisition/parser cases, 35 word-list/migration cases, 19 word-editor callback cases, 30 channel-model cases and 24 channel-toolbar/editor callback cases. They check matching, narrow windows, volume composition, stale responses, bounded acquisition and richer-caption precedence. Editor tests run actual callbacks with Android view doubles. Channel checks cover the viewed channel versus the playing channel, navigation during a confirmation dialog, checked state, no duplicated toolbar button, preserving search clicks, legacy names, URL normalization, editing labels, Save/Cancel, removing all entries and immediate audio restoration. These are host checks, not rendering or listening tests on Android.
 
-No phone was connected for the editor's new installation/UI test. Earlier 0.8 listening evidence does not establish that the new editor has been tested on a phone.
+No phone was connected for the word editor or channel button/editor installation/UI tests. Earlier 0.8 listening evidence does not establish that these new interfaces have been tested on a phone. Toolbar fit and coexistence with all other optional toolbar patches need a native check.
 
 ## Still unverified
 
