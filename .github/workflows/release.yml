@@ -83,7 +83,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          tag=v0.10.0
+          tag=v0.10.1
           tagged=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)
           test "$tagged" = "$GITHUB_SHA" || { echo 'Create a lightweight release tag on this exact commit before dispatching.'; exit 1; }
-          gh release create "$tag" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --title "YouTube Censor 0.10.0 - channel whitelist alpha" --prerelease --notes-file RELEASE_NOTES.md
+          gh release create "$tag" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --title "YouTube Censor 0.10.1 - simplified settings alpha" --prerelease --notes-file RELEASE_NOTES.md

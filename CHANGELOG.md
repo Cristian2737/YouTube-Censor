@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 - simplified settings alpha
+
+- Remove Always censor channels and its global-switch override; keep one whitelist. Legacy override values no longer enable censoring when the main switch is off.
+- Reduce the main settings page to six entries. Group timing controls under Mute timing and expert/troubleshooting controls under Advanced settings.
+- Remove duplicate preset switches and unused raw-word/channel labels from the interface. The word editor remains the single place to manage entries, preserving saved presets and word rules.
+- Shorten repeated descriptions and clarify that caption masking follows the selected style.
+- Retain all existing word timing, whitelist and user-volume behavior. Update runtime regression checks for the simplified enable/whitelist rules.
+
 ## 0.10.0 - channel whitelist alpha
 
 - Add a separate shield action on channel pages using the shared browse and toolbar hooks, following Morphe's Channel search layout. Does not require selecting Channel search or replace its controls.

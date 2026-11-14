@@ -68,12 +68,12 @@ public final class ProfanityRuntimeTest {
         Settings.PROFANITY_NEVER_CHANNELS.save("");
         ProfanityFilterPatch.channelRulesChanged(); volume(0,"filter resumes after unwhitelisting");
         Settings.PROFANITY_NEVER_CHANNELS.save("ibz");
-        at(1500); volume(.42f, "never-censor channel wins");
+        at(1500); volume(.42f, "whitelisted channel stays audible");
         Settings.PROFANITY_ALWAYS_CHANNELS.save("channel-1");
-        at(1500); volume(.42f, "never-censor still wins over always-censor");
+        at(1500); volume(.42f, "obsolete channel override cannot defeat whitelist");
         Settings.PROFANITY_NEVER_CHANNELS.save("");
         Settings.PROFANITY_FILTER.save(false);
-        at(1500); volume(0, "always-censor overrides global off");
+        at(1500); volume(.42f, "obsolete always-censor value cannot override global off");
         Settings.PROFANITY_ALWAYS_CHANNELS.save("");
         at(1500); volume(.42f, "global off immediately releases filter mute");
         Settings.PROFANITY_FILTER.save(true);

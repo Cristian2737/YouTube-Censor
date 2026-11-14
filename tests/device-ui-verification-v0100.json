@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-13",
+  "censorVersion": "0.10.0",
+  "androidVersion": "14",
+  "youtubeVersion": "21.30.216",
+  "device": "Motorola moto g play (2024)",
+  "package": "app.morphe.android.youtube",
+  "totalSelectedPatches": 115,
+  "sameSigningIdentity": true,
+  "sameAppIdAndFirstInstallTime": true,
+  "nativeUiChecks": [
+    "Word editor opened from actual settings",
+    "Word add, search, edit, removal and persistence passed",
+    "Word Cancel discarded draft removal",
+    "Whitelist editor opened from actual settings",
+    "Channel ID and label saved, searched, edited and removed",
+    "Whitelist Cancel discarded draft removal",
+    "Whitelist button visible and attached on actual ibz channel page",
+    "Existing Channel search button also visible and attached",
+    "Toolbar saved viewed channel ID and changed checked state",
+    "Toolbar removal passed"
+  ],
+  "originalTestedSettingsRestored": true,
+  "audioSelfTestDisabled": true,
+  "audiblePlaybackTest": false,
+  "method": "Temporary same-signature instrumentation with UiAutomation; actual native preference dialogs and live channel toolbar, not host view doubles",
+  "limits": "Verifies 0.10.0 editors and toolbar. The 0.10.1 grouped settings layout still needs its own native check. No new listening test was performed."
+}

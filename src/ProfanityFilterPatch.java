@@ -75,18 +75,14 @@ public final class ProfanityFilterPatch {
 
     private ProfanityFilterPatch() {}
 
-    /**
-     * Channel overrides use exact channel IDs or names, one per line or comma.
-     * Never-censor wins over always-censor when both lists contain a channel.
-     */
+    /** Channel exceptions use exact channel IDs or names, one per line or comma. */
     private static boolean containsChannel(String entries) {
         return ProfanityChannels.matches(entries,VideoInformation.getChannelId(),VideoInformation.getChannelName());
     }
 
     public static boolean isEnabled() {
         if (containsChannel(Settings.PROFANITY_NEVER_CHANNELS.get())) return false;
-        return Settings.PROFANITY_FILTER.get()
-                || containsChannel(Settings.PROFANITY_ALWAYS_CHANNELS.get());
+        return Settings.PROFANITY_FILTER.get();
     }
 
     /** Apply channel exceptions immediately while preserving user mute/ducking. */

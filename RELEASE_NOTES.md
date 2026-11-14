@@ -1,4 +1,6 @@
-# YouTube Censor 0.10.0 - channel whitelist alpha
+# YouTube Censor 0.10.1 - simplified settings alpha
+
+The main settings page now has six entries. Timing controls are under **Mute timing**; regex, matching, caption style and troubleshooting are under **Advanced settings**. **Always censor channels** and its override behavior are removed. The main Enable switch applies to all channels except your whitelist.
 
 Whitelist the channel you are viewing with the new **shield +** toolbar action. A checked shield means the channel is exempt; tap it to remove the exception. This works alongside the existing Channel search action and does not require that patch to be selected.
 
@@ -10,7 +12,7 @@ See and customize the full active word list on Android. Open **Settings > Morphe
 - Add, edit or remove entries using plain text. No regex required.
 - Save commits your edits; Cancel discards them. Restore Defaults is a draft until saved.
 - Existing additions, exclusions and literal overrides carry forward. Unchanged default matching families keep their behavior.
-- Optional regex and preset switches are now under Advanced word rules. Regex and channel choices are preserved.
+- Optional regex is under Advanced settings. The word editor replaces duplicate preset switches; saved word choices are preserved.
 
 Restart YouTube after saving changes to refresh already-loaded caption schedules.
 
@@ -20,7 +22,7 @@ Select **YouTube Censor** from this bundle alongside your desired upstream patch
 
 Update the source in Morphe Manager, then repatch a clean supported YouTube APK with **YouTube Censor** and your existing patches. Updating a patch source alone does not modify an installed app.
 
-Automated suites cover 270 assertions, including channel navigation, preserving search actions, stable IDs, editing labels, Save/Cancel and immediate audio restoration. Toolbar/editor callbacks use Android view doubles. The earlier v0.8 runtime passed a phone listening check. New interfaces still need real-phone UI testing; no phone was connected during development. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
+Automated suites cover 270 assertions, including channel navigation, preserving search actions, stable IDs, editing labels, Save/Cancel and immediate audio restoration. Host callback checks use Android view doubles. The 0.10.0 editors and live channel toolbar also passed native Android 14 checks alongside all 115 selected patches; the new grouped layout still needs its own native check. The earlier v0.8 runtime passed a phone listening check. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
 
 Assets:
 - **youtube-censor.mpp** - import into Morphe Manager, not an APK.

@@ -74,7 +74,6 @@ def install(root: Path) -> None:
     public static final StringSetting PROFANITY_MUTE_BUFFER = new StringSetting("morphe_profanity_mute_buffer", "150", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_MUTE_DURATION = new StringSetting("morphe_profanity_mute_duration", "1500", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_CENSOR_STYLE = new StringSetting("morphe_profanity_censor_style", "asterisks", parent(PROFANITY_FILTER));
-    public static final StringSetting PROFANITY_ALWAYS_CHANNELS = new StringSetting("morphe_profanity_always_channels", "", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_NEVER_CHANNELS = new StringSetting("morphe_profanity_never_channels", "", parent(PROFANITY_FILTER));
     public static final StringSetting PROFANITY_CHANNEL_LABELS = new StringSetting("morphe_profanity_channel_labels", "");
     public static final BooleanSetting PROFANITY_DIAGNOSTICS = new BooleanSetting("morphe_profanity_diagnostics", FALSE, parent(PROFANITY_FILTER));
@@ -174,21 +173,17 @@ def install(root: Path) -> None:
     <string name="morphe_profanity_screen_title">YouTube Censor</string>
     <string name="morphe_profanity_screen_summary">Mute profanity detected in timed subtitles</string>
     <string name="morphe_profanity_filter_title">Enable YouTube Censor</string>
-    <string name="morphe_profanity_filter_summary">YouTube Censor 0.10.0 alpha: word editor and channel whitelist; restart after changing word rules.</string>
+    <string name="morphe_profanity_filter_summary">Mute censored words on all channels except your whitelist.</string>
     <string name="morphe_profanity_channels_editor_title">Whitelisted channels</string>
-    <string name="morphe_profanity_channels_editor_summary">View, add, edit or remove channels that YouTube Censor skips. Also available from the shield button on a channel page.</string>
+    <string name="morphe_profanity_channels_editor_summary">Skip censoring on selected channels.</string>
     <string name="morphe_profanity_words_editor_title">Censored words and phrases</string>
-    <string name="morphe_profanity_words_editor_summary">View the full active word list. Search, add, edit or remove entries without regex.</string>
-    <string name="morphe_profanity_advanced_title">Advanced word rules</string>
-    <string name="morphe_profanity_advanced_summary">Preset groups and optional regex patterns. Your existing regex rules are preserved.</string>
+    <string name="morphe_profanity_words_editor_summary">View, add, edit or remove words and phrases.</string>
+    <string name="morphe_profanity_timing_title">Mute timing</string>
+    <string name="morphe_profanity_timing_summary">Word timing, mute padding and fallback duration.</string>
+    <string name="morphe_profanity_advanced_title">Advanced settings</string>
+    <string name="morphe_profanity_advanced_summary">Regex, matching, caption style and troubleshooting.</string>
     <string name="morphe_profanity_censor_captions_title">Censor caption text</string>
-    <string name="morphe_profanity_censor_captions_summary">Replace matching words with asterisks</string>
-    <string name="morphe_profanity_default_words_title">Filter common profanity</string>
-    <string name="morphe_profanity_default_words_summary">Include common-word presets, except entries removed in the word editor</string>
-    <string name="morphe_profanity_reverent_phrases_title">Filter irreverent expressions</string>
-    <string name="morphe_profanity_reverent_phrases_summary">Include oh my God and Jesus Christ</string>
-    <string name="morphe_profanity_custom_words_title">Custom words / exclusions</string>
-    <string name="morphe_profanity_custom_words_summary">Literal words and phrases separated by commas; prefix - to exclude a default</string>
+    <string name="morphe_profanity_censor_captions_summary">Hide matching words in displayed captions too.</string>
     <string name="morphe_profanity_custom_regex_title">Custom regex patterns</string>
     <string name="morphe_profanity_custom_regex_summary">Advanced: each expression on a separate line; invalid entries ignored</string>
     <string name="morphe_profanity_word_boundary_title">Match word boundaries</string>
@@ -203,10 +198,6 @@ def install(root: Path) -> None:
     <string name="morphe_profanity_mute_duration_summary">100–5000; defaults to 1500 when precise word timing is unavailable</string>
     <string name="morphe_profanity_censor_style_title">Caption censor style</string>
     <string name="morphe_profanity_censor_style_summary">Asterisks, [censored], hide or blocks</string>
-    <string name="morphe_profanity_always_channels_title">Always censor channels</string>
-    <string name="morphe_profanity_always_channels_summary">Exact channel IDs/names separated by commas; override global switch</string>
-    <string name="morphe_profanity_never_channels_title">Never censor channels</string>
-    <string name="morphe_profanity_never_channels_summary">Exact channel IDs/names; takes priority over Always censor</string>
     <string name="morphe_profanity_diagnostics_title">Show filter diagnostics</string>
     <string name="morphe_profanity_diagnostics_summary">Show the number of detected mute intervals when captions load</string>
     <string name="morphe_profanity_test_audio_title">Test audio muting (first 5 seconds)</string>
@@ -246,7 +237,7 @@ def install(root: Path) -> None:
         source = "https://github.com/Cristian2737/YouTube-Censor"
         author = "Cristian2737"''')
 
-    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.10.0")
+    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.10.1")
 
     print("Installed YouTube Censor. Run: ./gradlew buildAndroid")
 
