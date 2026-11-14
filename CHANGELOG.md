@@ -2,6 +2,8 @@
 
 ## 0.10.1 - simplified settings alpha
 
+- Native Android 14 verification passed for the six-entry main screen, grouped controls, word/channel editing and live channel toolbar alongside all 115 selected patches. Original tested settings restored; temporary helper removed.
+
 - Remove Always censor channels and its global-switch override; keep one whitelist. Legacy override values no longer enable censoring when the main switch is off.
 - Reduce the main settings page to six entries. Group timing controls under Mute timing and expert/troubleshooting controls under Advanced settings.
 - Remove duplicate preset switches and unused raw-word/channel labels from the interface. The word editor remains the single place to manage entries, preserving saved presets and word rules.

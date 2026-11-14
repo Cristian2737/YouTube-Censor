@@ -22,7 +22,7 @@ Select **YouTube Censor** from this bundle alongside your desired upstream patch
 
 Update the source in Morphe Manager, then repatch a clean supported YouTube APK with **YouTube Censor** and your existing patches. Updating a patch source alone does not modify an installed app.
 
-Automated suites cover 270 assertions, including channel navigation, preserving search actions, stable IDs, editing labels, Save/Cancel and immediate audio restoration. Host callback checks use Android view doubles. The 0.10.0 editors and live channel toolbar also passed native Android 14 checks alongside all 115 selected patches; the new grouped layout still needs its own native check. The earlier v0.8 runtime passed a phone listening check. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
+Automated suites cover 270 assertions, including channel navigation, preserving search actions, stable IDs, editing labels, Save/Cancel and immediate audio restoration. Host callback checks use Android view doubles. The 0.10.0 editors and live channel toolbar also passed native Android 14 checks alongside all 115 selected patches; the grouped 0.10.1 layout passed a separate native check of all six main entries, timing and advanced pages, followed by the editors and live channel toolbar. The earlier v0.8 runtime passed a phone listening check. Missing or unusable captions still cannot be filtered. No audio recognition, desktop export or project-operated service.
 
 Assets:
 - **youtube-censor.mpp** - import into Morphe Manager, not an APK.

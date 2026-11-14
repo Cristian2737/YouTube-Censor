@@ -2,7 +2,7 @@
 
 Mute profanity in the Android YouTube app using caption word timing. Runs on your phone, works with automatic and creator captions, and lets you customize words, regular expressions, caption masking, and channel exceptions.
 
-**Public alpha 0.10.1.** Includes an editable word list plus a channel-page whitelist button and searchable channel editor. Existing word-list choices and whitelist entries carry forward. Settings are grouped into Words, Whitelisted channels, Mute timing and Advanced settings; preset switches and Always censor are removed from the interface. The earlier v0.8 runtime passed a real-phone listening check; the editors and channel button passed native Android checks in 0.10.0. The grouped 0.10.1 layout needs its own native check. See [testing and limits](TESTING.md).
+**Public alpha 0.10.1.** Includes an editable word list plus a channel-page whitelist button and searchable channel editor. Existing word-list choices and whitelist entries carry forward. Settings are grouped into Words, Whitelisted channels, Mute timing and Advanced settings; preset switches and Always censor are removed from the interface. The earlier v0.8 runtime passed a real-phone listening check; the editors and channel button passed native Android checks in 0.10.0. The simplified 0.10.1 screen and grouped menus also passed native Android checks. See [testing and limits](TESTING.md).
 
 ## Install on Android
 
