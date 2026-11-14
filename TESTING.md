@@ -14,7 +14,9 @@ Sanitized machine-readable candidate evidence is in `tests/`. The hashes there i
 
 ## Automated checks
 
-157 assertions: 35 rules/scheduling, 41 reference-timing cases, 34 runtime lifecycle/volume cases and 47 acquisition/parser cases. They check matching, narrow windows, volume composition, stale responses, bounded acquisition and richer-caption precedence. Host tests do not prove every native YouTube hook or device works.
+211 assertions: 35 rules/scheduling, 41 reference-timing cases, 34 runtime lifecycle/volume cases, 47 acquisition/parser cases, 35 word-list/migration cases and 19 editor callback cases. They check matching, narrow windows, volume composition, stale responses, bounded acquisition and richer-caption precedence. The editor suite runs the actual preference callbacks with Android view doubles: existing settings, search, additions, editing, removal, duplicate/blank validation, Save/Cancel, staged Restore Defaults and empty-list persistence. These are host checks, not a rendering or listening test on Android.
+
+No phone was connected for the editor's new installation/UI test. Earlier 0.8 listening evidence does not establish that the new editor has been tested on a phone.
 
 ## Still unverified
 

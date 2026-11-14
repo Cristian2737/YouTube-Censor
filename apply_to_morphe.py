@@ -33,7 +33,7 @@ def install(root: Path) -> None:
     java = root / "extensions/youtube/src/main/java/app/morphe/extension/youtube"
     kotlin = root / "patches/src/main/kotlin/app/morphe/patches/youtube"
 
-    for name in ("ProfanityRules.java", "ProfanitySchedule.java", "ProfanityFilterPatch.java", "ProfanityWebCaptions.java"):
+    for name in ("ProfanityRules.java", "ProfanitySchedule.java", "ProfanityFilterPatch.java", "ProfanityWebCaptions.java", "ProfanityWordsPreference.java"):
         source = HERE / "src" / name
         target = java / "patches" / name
         if target.is_file() and target.read_bytes() != source.read_bytes():
@@ -164,11 +164,15 @@ def install(root: Path) -> None:
     <string name="morphe_profanity_screen_title">YouTube Censor</string>
     <string name="morphe_profanity_screen_summary">Mute profanity detected in timed subtitles</string>
     <string name="morphe_profanity_filter_title">Enable YouTube Censor</string>
-    <string name="morphe_profanity_filter_summary">YouTube Censor 0.8.1 alpha: fetch word timing on this device; restart after changing settings.</string>
+    <string name="morphe_profanity_filter_summary">YouTube Censor 0.9.0 alpha: fetch word timing on this device; restart after changing settings.</string>
+    <string name="morphe_profanity_words_editor_title">Censored words and phrases</string>
+    <string name="morphe_profanity_words_editor_summary">View the full active word list. Search, add, edit or remove entries without regex.</string>
+    <string name="morphe_profanity_advanced_title">Advanced word rules</string>
+    <string name="morphe_profanity_advanced_summary">Preset groups and optional regex patterns. Your existing regex rules are preserved.</string>
     <string name="morphe_profanity_censor_captions_title">Censor caption text</string>
     <string name="morphe_profanity_censor_captions_summary">Replace matching words with asterisks</string>
     <string name="morphe_profanity_default_words_title">Filter common profanity</string>
-    <string name="morphe_profanity_default_words_summary">Use the built-in common-word list</string>
+    <string name="morphe_profanity_default_words_summary">Include common-word presets, except entries removed in the word editor</string>
     <string name="morphe_profanity_reverent_phrases_title">Filter irreverent expressions</string>
     <string name="morphe_profanity_reverent_phrases_summary">Include oh my God and Jesus Christ</string>
     <string name="morphe_profanity_custom_words_title">Custom words / exclusions</string>
@@ -230,7 +234,7 @@ def install(root: Path) -> None:
         source = "https://github.com/Cristian2737/YouTube-Censor"
         author = "Cristian2737"''')
 
-    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.8.1")
+    inject(root / "gradle.properties", "version = 2.2.0", "version = 0.9.0")
 
     print("Installed YouTube Censor. Run: ./gradlew buildAndroid")
 

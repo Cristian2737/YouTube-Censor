@@ -2,7 +2,7 @@
 
 Mute profanity in the Android YouTube app using caption word timing. Runs on your phone, works with automatic and creator captions, and lets you customize words, regular expressions, caption masking, and channel exceptions.
 
-**Public alpha 0.8.1.** The v0.8 runtime passed a real-phone listening check: the profanity was muted and the following words remained audible. This release gives that same runtime its public name and distribution. Coverage is not guaranteed; see [testing and limits](TESTING.md).
+**Public alpha 0.9.0.** Now includes a visible, searchable word list with Add, Edit, Remove and Restore Defaults. Existing word choices migrate automatically. The earlier v0.8 runtime passed a real-phone listening check; the new editor has host callback tests, with a new on-phone UI check still pending. See [testing and limits](TESTING.md).
 
 ## Install on Android
 
@@ -12,15 +12,26 @@ Mute profanity in the Android YouTube app using caption word timing. Runs on you
 4. Select a clean, supported YouTube APK. **21.30.216 is the version tested here.** Obtain it yourself from a source you trust; no YouTube APK is distributed here. In the patch list, select **YouTube Censor** along with the other patches you want, then patch and install. For non-root installation, retain **GmsCore support** and follow [Morphe's installation guide](https://github.com/MorpheApp/morphe-manager/blob/main/docs/patching-simple-mode.md) for the required GmsCore app.
 5. In the patched app, open **Settings > Morphe > Player > YouTube Censor**. Leave **Fetch word timing on this device** enabled. Restart the app after changing settings when prompted. Keep **Test audio muting (first 5 seconds)** off for normal viewing.
 
-If the add-source link does not launch Manager, use the manual Remote method above. If your Manager hides alpha releases, enable **Pre-release patches** for this source. If remote import is unavailable, download `youtube-censor.mpp` from [Releases](https://github.com/Cristian2737/YouTube-Censor/releases/tag/v0.8.1) and add it using **Sources > + > Local**; local sources require manual updates.
+If the add-source link does not launch Manager, use the manual Remote method above. If your Manager hides alpha releases, enable **Pre-release patches** for this source. If remote import is unavailable, download `youtube-censor.mpp` from [Releases](https://github.com/Cristian2737/YouTube-Censor/releases/tag/v0.9.0) and add it using **Sources > + > Local**; local sources require manual updates.
 
 ### Updating an existing patched YouTube app
 
 Save your patch selection/options and **back up your Manager signing key before changing anything**. Repatch a clean original APK with the desired patches from this bundle. To update the installed app in place and retain its data, use the same package name and signing key as the existing installation. Android rejects an update signed with a different key. This repository has no access to your key. See [Manager backups and keystore](https://github.com/MorpheApp/morphe-manager/blob/main/docs/backup-and-keystore.md).
 
+## Editing the censored word list
+
+Open **Settings > Morphe > Player > YouTube Censor > Censored words and phrases**. The list shows active defaults together with your existing custom words; previously excluded defaults remain excluded.
+
+- Search to find an entry. Tap **Edit** to change it or **Remove** to stop censoring it.
+- Tap **Add word or phrase** for a new entry. Type ordinary text; regex punctuation is treated literally.
+- **Save** commits the list; **Cancel** discards the whole draft. Restart YouTube after saving so already-loaded caption schedules use your changes.
+- **Restore defaults** stages the full common-word and irreverent-expression presets. It takes effect only when you Save. Regex and channel settings are retained.
+
+Unchanged built-in entries retain their existing related-word matching, identified in the editor. Newly added words and phrases are literal entries. YouTube's `[ __ ]` caption markers are always filtered, even with an empty word list. Optional regex rules are separate under **Advanced word rules**; they can still match words you removed from the ordinary list.
+
 ## Features
 
-- Default word list, custom words/phrases and regex rules; optional word boundaries.
+- Full editable word list, default matching families, optional advanced regex rules and word boundaries.
 - Precise word-timed mutes when YouTube supplies offsets; short estimated mutes or broader fallback for sentence-only captions.
 - Optional caption masking: asterisks, replacement text, hidden words or blocks.
 - Always-censor and never-censor channel lists; the never-censor list takes priority.

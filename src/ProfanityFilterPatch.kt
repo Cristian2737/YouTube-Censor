@@ -38,10 +38,17 @@ val profanityFilterPatch = patch(
                 preferences = setOf(
                     SwitchPreference("morphe_profanity_filter", summary = true),
                     SwitchPreference("morphe_profanity_censor_captions", summary = true),
-                    SwitchPreference("morphe_profanity_default_words", summary = true),
-                    SwitchPreference("morphe_profanity_reverent_phrases", summary = true),
-                    TextPreference("morphe_profanity_custom_words"),
-                    TextPreference("morphe_profanity_custom_regex"),
+                    TextPreference("morphe_profanity_words_editor",
+                        tag = "app.morphe.extension.youtube.patches.ProfanityWordsPreference"),
+                    PreferenceScreenPreference(
+                        key = "morphe_profanity_advanced",
+                        sorting = PreferenceScreenPreference.Sorting.UNSORTED,
+                        preferences = setOf(
+                            SwitchPreference("morphe_profanity_default_words", summary = true),
+                            SwitchPreference("morphe_profanity_reverent_phrases", summary = true),
+                            TextPreference("morphe_profanity_custom_regex"),
+                        ),
+                    ),
                     SwitchPreference("morphe_profanity_word_boundary", summary = true),
                     SwitchPreference("morphe_profanity_web_timing", summary = true),
                     SwitchPreference("morphe_profanity_short_estimates", summary = true),

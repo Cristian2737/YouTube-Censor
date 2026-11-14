@@ -66,9 +66,8 @@ final class ProfanityRules {
         return compile(defaults, reverent, custom, "", true);
     }
 
-    /** Custom words are literal; customRegex is an advanced opt-in regex list. */
-    static Pattern compile(boolean defaults, boolean reverent, String custom,
-                           String customRegex, boolean boundaries) {
+    private static Map<String, String> effectiveExpressions(boolean defaults, boolean reverent,
+                                                             String custom) {
         Map<String, String> terms = defaultExpressions(defaults, reverent);
         Set<String> exclusions = new LinkedHashSet<>();
         if (custom != null) {
@@ -84,6 +83,58 @@ final class ProfanityRules {
             }
         }
         for (String term : exclusions) terms.remove(term);
+        return terms;
+    }
+
+    /** The complete active list, including defaults and existing customizations. */
+    static List<String> editableWords(boolean defaults, boolean reverent, String custom) {
+        List<String> words = new ArrayList<>(effectiveExpressions(defaults, reverent, custom).keySet());
+        words.sort(String.CASE_INSENSITIVE_ORDER);
+        return words;
+    }
+
+    static String normalizeEditableWord(String value) {
+        String word = value == null ? "" : value.strip().replaceAll("[\\s\\p{Z}]+", " ")
+                .toLowerCase(Locale.ROOT);
+        if (word.isEmpty()) throw new IllegalArgumentException("Enter a word or phrase.");
+        if (word.length() > 100) throw new IllegalArgumentException("Use at most 100 characters per entry.");
+        if (word.startsWith("-") || word.indexOf(',') >= 0 || word.indexOf(';') >= 0)
+            throw new IllegalArgumentException("Enter one word or phrase, without commas, semicolons or a leading minus.");
+        return word;
+    }
+
+    /**
+     * Save the visible list using the existing settings format. Unedited default
+     * families keep their inflection matching, and existing literal overrides
+     * stay literal. Removed defaults become exclusions without exposing syntax.
+     */
+    static String saveEditableWords(boolean defaults, boolean reverent, String previous,
+                                    List<String> edited) {
+        if (edited.size() > 500) throw new IllegalArgumentException("Use at most 500 words or phrases.");
+        Map<String, String> base = defaultExpressions(defaults, reverent);
+        Map<String, String> old = effectiveExpressions(defaults, reverent, previous);
+        Set<String> chosen = new LinkedHashSet<>();
+        for (String word : edited) chosen.add(normalizeEditableWord(word));
+        List<String> saved = new ArrayList<>();
+        for (String word : base.keySet()) if (!chosen.contains(word)) saved.add("-" + word);
+        for (String word : chosen) {
+            if (!base.containsKey(word) || (old.containsKey(word)
+                    && !old.get(word).equals(base.get(word)))) saved.add(word);
+        }
+        String result = String.join("\n", saved);
+        if (result.length() > 20000) throw new IllegalArgumentException("The word list is too large. Shorten some entries.");
+        return result;
+    }
+
+    static boolean includesWordForms(boolean defaults, boolean reverent, String custom, String word) {
+        String expression = effectiveExpressions(defaults, reverent, custom).get(word);
+        return expression != null && !expression.equals(literalPattern(word));
+    }
+
+    /** Custom words are literal; customRegex is an advanced opt-in regex list. */
+    static Pattern compile(boolean defaults, boolean reverent, String custom,
+                           String customRegex, boolean boundaries) {
+        Map<String, String> terms = effectiveExpressions(defaults, reverent, custom);
 
         List<String> expressions = new ArrayList<>();
         expressions.add(ALWAYS_MUTED);
